@@ -63,9 +63,10 @@ export function create(gameModel: GameModel, platformModel: PlatformModel) {
     if (errors.length > 0) {
       response.status(400).json({ errors });
     } else {
-      const { cover_url, platform_slugs, ...gameInput } = request.body;
+      const { cover_url, platform_slugs, price, ...gameInput } = request.body;
       gameInput.cover = { url: cover_url };
       gameInput.slug = slug;
+      gameInput.price = price;
 
       const platformSlugs: string[] =
         typeof platform_slugs === "string" ? platform_slugs.split(",").map((slug) => slug.trim()) : platform_slugs;
