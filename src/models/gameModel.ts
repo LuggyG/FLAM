@@ -28,6 +28,7 @@ export type GameInput = {
   summary: string;
   total_rating?: number;
   total_rating_count?: number;
+  price: number;
   url: string;
 };
 
@@ -104,7 +105,7 @@ export default class PlatformModel {
   validate(payload: Record<string, unknown>): string[] {
     const errors: string[] = [];
 
-    const mandatoryKeys = ["cover_url", "name", "platform_slugs", "slug", "summary"];
+    const mandatoryKeys = ["cover_url", "name", "platform_slugs", "slug", "summary", "price"];
 
     mandatoryKeys.forEach((key) => {
       if (!payload[key]) {
