@@ -29,3 +29,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.dropdown:hover > #cart-dropdown{
+  display: block;
+}
