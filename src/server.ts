@@ -1,4 +1,4 @@
-import { Db } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 import * as core from "express-serve-static-core";
 import express from "express";
 import * as gamesController from "./controllers/games.controller";
@@ -7,18 +7,62 @@ import * as platformsController from "./controllers/platforms.controller";
 import GameModel, { Game } from "./models/gameModel";
 import PlatformModel, { Platform } from "./models/platformModel";
 import bodyParser from "body-parser";
+import session from "express-session";
+import mongoSession from "connect-mongo";
+import { oauthClient } from "./controllers/login.controller";
 
 const clientWantsJson = (request: express.Request): boolean => request.get("accept") === "application/json";
 
 const jsonParser = bodyParser.json();
 const formParser = bodyParser.urlencoded({ extended: true });
 
-export function makeApp(db: Db): core.Express {
+export function makeApp(mongoClient: MongoClient): core.Express {
   const app = express();
+  const db: Db = mongoClient.db();
 
   nunjucks.configure("views", {
     autoescape: true,
     express: app,
+  });
+
+  const mongoStore = mongoSession(session);
+  if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+  }
+  const sessionParser = session({
+    secret: process.env.SECRET || "",
+    name: "sessionId",
+    resave: false,
+    saveUninitialized: true,
+    store: new mongoStore({
+      client: mongoClient,
+    }),
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      expires: new Date(Date.now() + 3600000),
+    },
+  });
+
+  app.get("/login", async (_request, response) => {
+    const urlAuth = await oauthClient.getAuthorizationURL().then((authUrl) => authUrl.href);
+
+    response.render("pages/login", { urlAuth });
+  });
+
+  app.get("/oauth/callback", sessionParser, (_request, response) => {
+    // get back an Access Token from an OAuth2 Authorization Code
+    const queryCode = String(_request.query.code);
+    oauthClient
+      .getTokensFromAuthorizationCode(queryCode)
+      .then((token) => {
+        if (_request.session) {
+          _request.session.accessToken = token.access_token;
+        }
+        response.redirect("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   });
 
   app.use("/assets", express.static("public"));

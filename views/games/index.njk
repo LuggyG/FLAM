@@ -21,17 +21,6 @@
     </div>
   </div>
 
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <!-- <p><span id="in-cart-items-num">0</span> Articles</p> -->
-      <p>Panier</p>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <p>Votre panier est vide</p>
-        <a href="/panier">Voir le panier</a>
-    </div>
-  </div>
-
   <ul class="list-group mb-5">
     {% for game in games %}
       <li class="list-group-item d-flex position-relative row">
@@ -44,10 +33,7 @@
         <div class="col-1 game-availability">
           {% for platform in game.platforms %}
             <img src="{{platform.platform_logo.url}}" height="40px" width="40px" class="ml-2">
-<<<<<<< HEAD
 
-=======
->>>>>>> e35d86a... rebase trial
             <label for="q">Quantité: </label>
 <select id="qt" name="q">
     <option value="1">1</option>
