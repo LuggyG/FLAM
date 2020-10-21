@@ -4,6 +4,7 @@ import express from "express";
 import * as gamesController from "./controllers/games.controller";
 import * as nunjucks from "nunjucks";
 import * as platformsController from "./controllers/platforms.controller";
+import * as loginController from "./controllers/login.controller";
 import GameModel, { Game } from "./models/gameModel";
 import PlatformModel, { Platform } from "./models/platformModel";
 import bodyParser from "body-parser";
@@ -43,13 +44,17 @@ export function makeApp(mongoClient: MongoClient): core.Express {
     },
   });
 
+  app.use("/assets", express.static("public"));
+  app.set("view engine", "njk");
+
+  app.use("/*", sessionParser, loginController.userIsConnected);
+
   app.get("/login", async (_request, response) => {
     const urlAuth = await oauthClient.getAuthorizationURL().then((authUrl) => authUrl.href);
-
-    response.render("pages/login", { urlAuth });
+    response.redirect(urlAuth);
   });
 
-  app.get("/oauth/callback", sessionParser, (_request, response) => {
+  app.get("/oauth/callback", (_request, response) => {
     // get back an Access Token from an OAuth2 Authorization Code
     const queryCode = String(_request.query.code);
     oauthClient
@@ -65,15 +70,17 @@ export function makeApp(mongoClient: MongoClient): core.Express {
       });
   });
 
-  app.use("/assets", express.static("public"));
-  app.set("view engine", "njk");
+  app.get("/logout", loginController.logout());
 
   const platformModel = new PlatformModel(db.collection<Platform>("platforms"));
   const gameModel = new GameModel(db.collection<Game>("games"));
 
   app.get("/panier", (_request, response) => response.render("pages/panier"));
 
-  app.get("/", (_request, response) => response.render("pages/home"));
+  app.get("/", async (_request, response) => {
+    response.render("pages/home", { isConnected: response.locals.isConnected });
+  });
+
   app.get("/api", (_request, response) => response.render("pages/api"));
 
   app.get("/panier", (_request, response) => response.render("pages/panier"));
