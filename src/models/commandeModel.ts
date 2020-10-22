@@ -1,8 +1,8 @@
 import { Collection, ObjectId } from "mongodb";
 
 export type CommandeInput = {
-  compte?: {
-    e_mail: string;
+  compte: {
+    email: string;
     adress_livraison?: {
       firstname: string;
       lastname: string;
@@ -19,7 +19,7 @@ export type CommandeInput = {
       slug: string;
       name: string;
       pv: number;
-      platform?: {
+      platform: {
         slug: string;
       };
     };

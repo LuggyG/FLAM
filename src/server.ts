@@ -7,6 +7,10 @@ import * as platformsController from "./controllers/platforms.controller";
 import GameModel, { Game } from "./models/gameModel";
 import PlatformModel, { Platform } from "./models/platformModel";
 import bodyParser from "body-parser";
+import * as comptesController from "./controllers/comptes.controller";
+import CompteModel, { Compte } from "./models/compteModel";
+import * as paniersController from "./controllers/paniers.controller";
+import PanierModel, { Panier } from "./models/panierModel";
 
 const clientWantsJson = (request: express.Request): boolean => request.get("accept") === "application/json";
 
@@ -26,6 +30,8 @@ export function makeApp(db: Db): core.Express {
 
   const platformModel = new PlatformModel(db.collection<Platform>("platforms"));
   const gameModel = new GameModel(db.collection<Game>("games"));
+  const compteModel = new CompteModel(db.collection<Compte>("comptes"));
+  const panierModel = new PanierModel(db.collection<Panier>("paniers"));
 
   app.get("/", (_request, response) => response.render("pages/home"));
   app.get("/api", (_request, response) => response.render("pages/api"));
@@ -50,6 +56,21 @@ export function makeApp(db: Db): core.Express {
   app.put("/games/:slug", jsonParser, gamesController.update(gameModel, platformModel));
   app.post("/games/:slug", formParser, gamesController.update(gameModel, platformModel));
   app.delete("/games/:slug", jsonParser, gamesController.destroy(gameModel));
+
+  app.get("/comptes/new", comptesController.newCompte());
+  app.get("/comptes/:email", comptesController.show(compteModel));
+  app.get("/comptes/:email/edit", comptesController.edit(compteModel));
+  app.post("/comptes", jsonParser, formParser, comptesController.create(compteModel));
+  app.put("/comptes/:email", jsonParser, comptesController.update(compteModel));
+  app.post("/comptes/:email", formParser, comptesController.update(compteModel));
+
+  app.get("/paniers/new", paniersController.newPanier());
+  app.get("/paniers/:email", paniersController.show(panierModel));
+  app.get("/paniers/:email/edit", paniersController.edit(panierModel));
+  app.post("/paniers", jsonParser, paniersController.create(panierModel));
+  app.put("/paniers/:email", jsonParser, paniersController.update(panierModel));
+  //  app.post("/paniers/:email", jsonParser, paniersController.update(panierModel));
+  app.delete("/paniers/:email", jsonParser, paniersController.destroy(panierModel));
 
   app.get("/*", (request, response) => {
     console.log(request.path);
