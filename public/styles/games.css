@@ -2,3 +2,32 @@
   right: 10px;
   bottom: 5px;
 }
+#cardtitle{
+  text-decoration: none;
+  font-size: 12px ;
+  color:#17a2b8!important;;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  display:block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0.75rem;
+}
+#price{
+  font-family: "Copperplate full stack",sans-serif; 
+  font-size: 24px; 
+  font-weight: 700; 
+  color:white;
+}
+
+#addcart{
+  font-family: "Copperplate full stack",sans-serif; 
+  font-size: 14px; 
+  font-weight: 700; 
+  color:white;
+}

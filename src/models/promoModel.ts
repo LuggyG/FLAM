@@ -1,10 +1,10 @@
 import { Collection, ObjectId } from "mongodb";
 
 export type PromoInput = {
-  code:string;  
-  remise:number;
-  date_deb_valid:Date;
-  date_fin_valid:Date;
+  code: string;
+  remise: number;
+  date_deb_valid: Date;
+  date_fin_valid: Date;
 };
 
 export type Promo = PromoInput & {
@@ -21,7 +21,7 @@ export default class PanierModel {
     return this.collection.find({}).toArray();
   }
 
-  findByCode(code: String): Promise<Promo | null> {
+  findByCode(code: string): Promise<Promo | null> {
     return this.collection.findOne({
       code: code,
     });

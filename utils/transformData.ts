@@ -1,6 +1,5 @@
 import games from "../data/games";
 import platforms from "../data/platforms";
-import comptes from "../data/comptes";
 
 type PlatformData = {
   code: number;
@@ -46,10 +45,10 @@ const transformGame = (game: GameData): GameWithPlatforms => {
 
   return {
     ...game,
+    pv: 54,
     platforms: gamePlatforms,
   };
 };
-
 
 const transformPlatform = (platform: PlatformData): PlatformWithGames => {
   const ptfGames = games.filter((game) => game.platforms.includes(platform.code));
