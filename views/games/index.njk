@@ -43,7 +43,7 @@
               {% endfor %}
 
   </div>
-{# <label for="q">Quantité: </label>
+<label for="q">Quantité: </label>
 <select id="qt" name="q">
     <option value="1">1</option>
     <option value="2">2</option>
@@ -54,5 +54,13 @@
     <option value="7">7</option>
     <option value="8">8</option>
     <option value="9">9</option>
-</select> #}
+</select>
+
+<button type="button" class="add-to-cart" >Ajouter au panier</button>
+
+          {% endfor %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}
