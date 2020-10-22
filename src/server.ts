@@ -85,6 +85,10 @@ export function makeApp(mongoClient: MongoClient): core.Express {
     response.render("pages/home", { isConnected: response.locals.isConnected });
   });
 
+  app.get("/", async (_request, response) => {
+    response.render("pages/home", { isConnected: response.locals.isConnected });
+  });
+
   app.get("/api", (_request, response) => response.render("pages/api"));
 
   app.get("/panier", (_request, response) => response.render("pages/panier"));
