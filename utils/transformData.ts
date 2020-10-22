@@ -45,6 +45,7 @@ const transformGame = (game: GameData): GameWithPlatforms => {
 
   return {
     ...game,
+    pv: 54,
     platforms: gamePlatforms,
   };
 };

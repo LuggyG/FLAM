@@ -1,36 +1,36 @@
 import { Collection, ObjectId } from "mongodb";
 
 export type CommandeInput = {
-  compte?:{
-    e_mail:string;  
+  compte: {
+    email: string;
     adress_livraison?: {
-      firstname:string;
-      lastname:string;      
-      numero : string;
+      firstname: string;
+      lastname: string;
+      numero: string;
       rue: string;
       rue_complement?: string;
       code_postal: string;
       ville: string;
       pays: string;
-    }
+    };
   };
-  panier : {
+  panier: {
     game: {
-      slug:string;
-      name:string;
-      pv:number;
-      platform?:{
-        slug:string;
-      }
-    }
-    qte:number;
-  }
-  codePromo?:string;
-  fraisPort?:number;
-  montant:number;
-  Paiement:{
-    type:string;
-  }
+      slug: string;
+      name: string;
+      pv: number;
+      platform: {
+        slug: string;
+      };
+    };
+    qte: number;
+  };
+  codePromo?: string;
+  fraisPort?: number;
+  montant: number;
+  Paiement: {
+    type: string;
+  };
 };
 
 export type Commande = CommandeInput & {
@@ -42,5 +42,4 @@ export default class CommandeModel {
   constructor(collection: Collection) {
     this.collection = collection;
   }
-
 }
