@@ -7,14 +7,16 @@ dotenv.config();
 let redirect_path = "http://localhost:8080";
 
 if (process.env.NODE_ENV === "production") {
-  redirect_path = "https://floating-refuge-62645.herokuapp.com/";
+  redirect_path = "https://floating-refuge-62645.herokuapp.com";
 }
+
+const finalRedirect = redirect_path + "/oauth/callback";
 
 const oauthClientConstructorProps: OAuth2ClientConstructor = {
   openIDConfigurationURL: "https://fewlines.connect.prod.fewlines.tech/.well-known/openid-configuration",
   clientID: "QY6jqlGe_T4EiXV_I5SRsw==",
   clientSecret: process.env.CLIENT_SECRET || "",
-  redirectURI: redirect_path + "/oauth/callback",
+  redirectURI: finalRedirect,
   audience: "flam",
   scopes: ["openid", "email", "phone"],
 };
