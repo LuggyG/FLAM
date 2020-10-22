@@ -20,11 +20,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "moment": "^2.29.1",
     "mongodb": "^3.6.2",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
     "nunjucks": "^3.2.2",
-    "slug": "^3.5.1"
+    "slug": "^3.5.1",
+    "taiko": "^1.0.25"
   },
   "devDependencies": {
     "@types/connect-mongo": "^3.1.3",
