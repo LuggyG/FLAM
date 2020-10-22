@@ -1,12 +1,12 @@
 import { Collection, ObjectId } from "mongodb";
 
 export type CompteInput = {
-  email:string;
+  email: string;
   adress: {
-    code:number; //0 adresse du client autre :  adresse de livraison
+    code: number; //0 adresse du client autre :  adresse de livraison
     firstname: string;
     lastname: string;
-    numero : string;
+    numero: string;
     rue: string;
     rue_complement?: string;
     code_postal: string;
@@ -14,7 +14,6 @@ export type CompteInput = {
     pays: string;
   }[];
 };
-
 
 export type Compte = CompteInput & {
   _id: ObjectId;
