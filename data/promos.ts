@@ -25,4 +25,4 @@ const promos = [
   },
 ];
 
-// export default promos;
+export default promos;
