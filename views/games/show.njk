@@ -17,19 +17,24 @@
       <div class="col-8 row justify-content-center align-items-center">
 
         <h1 class="col-12 col-md-9">{{game.name}}</h1>
-        <a href="/games/{{game.slug}}/edit" class="btn btn-success ml-5">Edit</a>
+
       </div>
     </div>
-
+    <small class="text-muted">
     <p>
       available on
       {% for platform in game.platforms %}
         <a href="/platforms/{{platform.slug}}">{{platform.name}}</a>
       {% endfor %}
     </p>
-
+    </small>
+    
     <p id="game-summary">{{game.summary}}</p>
+    <button type="button" class="btn btn-danger btn-sm add-to-cart m-1"><div id="price"> {{game.price}}€</div><div id="addcart"> Ajouter au panier</div></button>
+    <a href="/games/{{game.slug}}/edit" class="btn btn-info btn-sm add-to-cart m-1">Edit</a>
+
   </div>
+
 
   <h2>Screenshots</h2>
   {% if game.screenshots %}
