@@ -1,8 +1,9 @@
 .banner {
-  height: 400px;
-  background-image: url(/assets/images/banner-img.jpg);
+  height: 300px;
+  background-image: url(/assets/images/banner-img.gif);
   background-size: 100%;
   background-position: center;
+  background-attachment: fixed;
   color: white;
   margin: 0;
 }
@@ -12,7 +13,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0.5;
+  opacity: 0;
 }
 
 .banner .container {
@@ -32,4 +33,12 @@
 
 .dropdown:hover > #cart-dropdown{
   display: block;
+}
+
+body{
+  background-image: url(/assets/images/background.jpg);
+}
+
+.bg-dark {
+  background-color: #202224!important;
 }
