@@ -49,11 +49,6 @@ export function makeApp(mongoClient: MongoClient): core.Express {
 
   app.use("/*", sessionParser, loginController.userIsConnected);
 
-  app.get("/login", async (_request, response) => {
-    const urlAuth = await oauthClient.getAuthorizationURL().then((authUrl) => authUrl.href);
-    response.redirect(urlAuth);
-  });
-
   app.get("/oauth/callback", (_request, response) => {
     // get back an Access Token from an OAuth2 Authorization Code
     const queryCode = String(_request.query.code);
@@ -70,12 +65,15 @@ export function makeApp(mongoClient: MongoClient): core.Express {
       });
   });
 
+  app.get("/login", async (_request, response) => {
+    const urlAuth = await oauthClient.getAuthorizationURL().then((authUrl) => authUrl.href);
+    response.redirect(urlAuth);
+  });
+
   app.get("/logout", loginController.logout());
 
   const platformModel = new PlatformModel(db.collection<Platform>("platforms"));
   const gameModel = new GameModel(db.collection<Game>("games"));
-
-  app.get("/panier", (_request, response) => response.render("pages/panier"));
 
   app.get("/", async (_request, response) => {
     response.render("pages/home", { isConnected: response.locals.isConnected });
