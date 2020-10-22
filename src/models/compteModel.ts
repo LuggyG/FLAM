@@ -24,4 +24,19 @@ export default class CompteModel {
   constructor(collection: Collection) {
     this.collection = collection;
   }
+  findByMail(mail: string): Promise<Compte | null> {
+    return this.collection.findOne({
+      email: mail,
+    });
+  }
+  async insertOne(payload: CompteInput): Promise<Compte> {
+    const dbResponse = await this.collection.insertOne(payload);
+    const { ops } = dbResponse;
+    return ops[0];
+  }
+  async updateOne(mail: string, payload: Compte): Promise<Compte> {
+    const dbResponse = await this.collection.replaceOne({ email: mail }, payload);
+    const { ops } = dbResponse;
+    return ops[0];
+  }
 }
