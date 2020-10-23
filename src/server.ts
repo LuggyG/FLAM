@@ -89,12 +89,8 @@ export function makeApp(mongoClient: MongoClient): core.Express {
     response.render("pages/home", { isConnected: response.locals.isConnected });
   });
 
-  app.get("/panier", (_request, response) => response.render("pages/panier"));
-
   app.get("/", (_request, response) => response.render("pages/home"));
   app.get("/api", (_request, response) => response.render("pages/api"));
-
-  app.get("/panier", (_request, response) => response.render("pages/panier"));
 
   app.get("/platforms", platformsController.index(platformModel));
   app.get("/platforms/new", platformsController.newPlatform());
@@ -122,13 +118,14 @@ export function makeApp(mongoClient: MongoClient): core.Express {
   app.put("/comptes/:email", jsonParser, comptesController.update(compteModel));
   app.post("/comptes/:email", formParser, comptesController.update(compteModel));
 
-  app.get("/paniers/new", paniersController.newPanier());
-  app.get("/paniers/:email", paniersController.show(panierModel));
-  app.get("/paniers/:email/edit", paniersController.edit(panierModel));
-  app.post("/paniers", jsonParser, paniersController.create(panierModel));
-  app.put("/paniers/:email", jsonParser, paniersController.update(panierModel));
+  app.get("/panier", paniersController.index(panierModel));
+  app.get("/panier/new", paniersController.newPanier());
+  app.get("/panier/:email", paniersController.show(panierModel));
+  app.get("/panier/:email/edit", paniersController.edit(panierModel));
+  app.post("/panier", jsonParser, formParser, paniersController.create(panierModel));
+  app.put("/panier/:email", jsonParser, formParser, paniersController.update(panierModel));
   //  app.post("/paniers/:email", jsonParser, paniersController.update(panierModel));
-  app.delete("/paniers/:email", jsonParser, paniersController.destroy(panierModel));
+  app.delete("/panier/:email", jsonParser, paniersController.destroy(panierModel));
 
   app.get("/*", (request, response) => {
     console.log(request.path);
