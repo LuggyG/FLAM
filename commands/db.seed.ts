@@ -13,4 +13,7 @@ initDb().then(async (client) => {
   await db.collection("platforms").insertMany(platformsWithGames);
   await db.collection("comptes").insertMany(comptes);
   await db.collection("promos").insertMany(promos);
+
+  console.log("data imported");
+  client.close();
 });

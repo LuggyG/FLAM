@@ -89,6 +89,9 @@ export function makeApp(mongoClient: MongoClient): core.Express {
     response.render("pages/home", { isConnected: response.locals.isConnected });
   });
 
+  app.get("/panier", (_request, response) => response.render("pages/panier"));
+
+  app.get("/", (_request, response) => response.render("pages/home"));
   app.get("/api", (_request, response) => response.render("pages/api"));
 
   app.get("/panier", (_request, response) => response.render("pages/panier"));

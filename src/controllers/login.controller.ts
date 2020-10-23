@@ -7,7 +7,7 @@ dotenv.config();
 let redirect_path = "http://localhost:8080";
 
 if (process.env.NODE_ENV === "production") {
-  redirect_path = "https://floating-refuge-62645.herokuapp.com/";
+  redirect_path = "https://floating-refuge-62645.herokuapp.com";
 }
 
 const oauthClientConstructorProps: OAuth2ClientConstructor = {
