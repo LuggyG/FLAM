@@ -22,18 +22,7 @@
     </div>
   </div>
 
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <!-- <p><span id="in-cart-items-num">0</span> Articles</p> -->
-      <p>Panier</p>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <p>Votre panier est vide</p>
-        <a href="/panier">Voir le panier</a>
-    </div>
-  </div>
-
-  <ul class="list-group mb-5">
+  <div class="d-flex justify-content-center flex-wrap">
     {% for game in games %}
       <a href="/games/{{game.slug}}">
       <div class="card border-info p-1 m-1 shadow-lg"style="width: 12rem;">
@@ -42,40 +31,26 @@
 				  <p class="card-title text-truncate"><a id="cardtitle" href="/games/{{game.slug}}">{{game.name}}</a></p>
           {% for platform in game.platforms %}
             <img src="{{platform.platform_logo.url}}" height="40px" width="40px" class="ml-2">
-
-            <label for="q">Quantité: </label>
-
-          <img src="{{platform.platform_logo.url}}" height="40px" width="40px">
           {% endfor %}
-
         </div>
-
         <div class="d-flex card-footer justify-content-center flex-wrap">
-          <button type="button" class="btn btn-danger btn-sm add-to-cart"><div id="price"> {{game.price}}€</div><div id="addcart"> Ajouter au panier</div></button>
+          <button type="button" class="btn btn-danger btn-sm add-to-cart"><div id="price">{{game.price}}€</div><div id="addcart"> Ajouter au panier</div></button>
         </div>
-
       </div>
-              {% endfor %}
 
-  </div>
-<label for="q">Quantité: </label>
-<select id="qt" name="q">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-</select>
+      <!-- <label for="q">Quantité: </label>
+      <select id="qt" name="q">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+      </select> -->
 
-<button type="button" class="add-to-cart" >Ajouter au panier</button>
-
-          {% endfor %}
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
+  {% endfor %}
+    </div>
 {% endblock %}

@@ -31,16 +31,16 @@
   justify-content: center;
 }
 
-.dropdown:hover > #cart-dropdown{
-  display: block;
+.dropdown {
+  margin-right: 5rem;
 }
 
-body{
+body {
   background-image: url(/assets/images/background.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
 .bg-dark {
-  background-color: #202224!important;
+  background-color: #202224 !important;
 }
