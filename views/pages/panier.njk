@@ -3,12 +3,20 @@
 {% block content %}
     
 
-<table class="table">
-    <thead>
-        <tr><th>Article</th><th>Prix</th><th>Quantité</th></tr>
-    </thead>
-    <tbody id="cart-tablebody"></tbody>
-</table>
+<div class="d-flex justify-content-center flex-wrap">
+    {% for game in panier %}
+        <a href="/games/{{game.slug}}">
+            <div class="card border-info p-1 m-1 shadow-lg"style="width: 12rem;">
+            <img src="{{game.cover_url}}" alt="{{game.name}} cover" class="card-img-top">
+        </a>
+				<div class="card-body bg-light text-center">
+                  <p class="card-title text-truncate"><a id="cardtitle" href="/games/{{game.slug}}">{{game.name}}</a></p>
+                  <p>{{game.price}} €</p>
+                </div>
+        </div>
+
+    {% endfor %}
+</div>
 
 <p>Sous total : <span class="subtotal"></span>€</p>
 

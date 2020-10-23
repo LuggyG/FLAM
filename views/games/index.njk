@@ -25,32 +25,20 @@
   <div class="d-flex justify-content-center flex-wrap">
     {% for game in games %}
       <a href="/games/{{game.slug}}">
-      <div class="card border-info p-1 m-1 shadow-lg"style="width: 12rem;">
+          <div class="card border-info p-1 m-1 shadow-lg"style="width: 12rem;">
           <img src="{{game.cover.url}}" alt="{{game.name}} cover" class="card-img-top">
-				<div class="card-body bg-light text-center"></a>
+      </a>
+				<div class="card-body bg-light text-center">
 				  <p class="card-title text-truncate"><a id="cardtitle" href="/games/{{game.slug}}">{{game.name}}</a></p>
           {% for platform in game.platforms %}
             <img src="{{platform.platform_logo.url}}" height="40px" width="40px" class="ml-2">
           {% endfor %}
         </div>
         <div class="d-flex card-footer justify-content-center flex-wrap">
-          <button type="button" class="btn btn-danger btn-sm add-to-cart"><div id="price">{{game.price}}€</div><div id="addcart"> Ajouter au panier</div></button>
+          {% include "games/hidden_form.njk" %}
         </div>
       </div>
 
-      <!-- <label for="q">Quantité: </label>
-      <select id="qt" name="q">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-      </select> -->
-
-  {% endfor %}
-    </div>
+    {% endfor %}
+  </div>
 {% endblock %}
